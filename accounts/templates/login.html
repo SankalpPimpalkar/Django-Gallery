@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Gallery | Register
+{% endblock %}
+
+{% block content %}
+<div style="width: 30%;" class="container mx-auto">
+    <form method="post" class="mt-5">
+        {% csrf_token %}
+        <h3 class="fw-bold mb-3">
+            Login Account
+        </h2>
+
+        <div class="mb-3">
+            <label for="username" class="form-label">
+                Username
+            </label>
+            <input type="text" class="form-control" id="username" name="username" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">
+                Password
+            </label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+
+        <button type="submit" style="width: 100%;" class="btn btn-success">
+            Login
+        </button>
+
+        <p class="mt-2">
+            New User ? 
+            <a href="{% url 'create_user' %}" class="fw-bold text-decoration-none text-success-emphasis px-2">
+                Create Account
+            </a>
+        </p>
+    </form>
+</div>
+{% endblock %}

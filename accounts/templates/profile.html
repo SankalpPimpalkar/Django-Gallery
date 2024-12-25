@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Gallery | Profile
+{% endblock %}
+
+{% block content %}
+<div style="width: 100%;" class="my-4">
+    <!-- Profile Header -->
+    <div class="text-start mb-4">
+        <h1 class="display-5 fw-bold">Welcome, {{ user.username }}</h1>
+        <div>
+            <a class="btn btn-success mb-4 me-2 fw-semibold" href="{% url 'edit_profile' %}">
+                Edit Profile
+            </a>
+            <a class="btn btn-danger mb-4 me-2 fw-semibold" href="{% url 'logout_user' %}">
+                Logout
+            </a>
+        </div>
+    </div>
+
+    <!-- Your Posts Section -->
+    <h2 class="fw-bold">
+        Your Posts
+    </h2>
+    <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: start;" class="container-fluid text-center mt-3 px-0">
+        {% for post in posts %}
+            <div class="card shadow-sm" style="width: 18rem; border-radius: 8px; overflow: hidden;">
+                <div style="height: 200px; overflow: hidden;">
+                    <img src="{{ post.image.url }}" 
+                        class="card-img-top" 
+                        alt="{{ post.title }}" 
+                        style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+
+                <div class="card-body" style="text-align: left;">
+                    <h5 class="card-title" style="font-size: 1.25rem; font-weight: bold; margin-bottom: 0.5rem;">
+                        {{ post.title }}
+                    </h5>
+                    <p class="card-text" style="font-size: 0.9rem; color: #555;">
+                        {{ post.description|truncatewords:60 }}
+                    </p>
+
+                    <form method='post'>
+                        {% csrf_token %}
+                        <button name="delete_post" value={{post.id}} class="btn btn-danger me-2">
+                            Delete
+                        </button>
+
+                        <button name="toggle_privacy" value={{post.id}} class="btn btn-primary me-2">
+                            {% if post.is_private %}
+                                Private
+                                {% else %}
+                                Public
+                            {% endif %}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        {% empty %}
+        <div class="container text-center" style="margin-top: 3rem;">
+            <h3 style="color: #888; font-weight: bold;">No Posts Available</h3>
+            <p style="color: #555; font-size: 1rem;">
+                It seems there are no posts to show. 
+                {% if user.is_authenticated %}
+                    Click the button above to create your first post!
+                {% else %}
+                    Please log in to create or view posts.
+                {% endif %}
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Gallery | Edit Profile
+{% endblock %}
+
+
+{% block content %}
+<div style="width: 30%;" class="container mx-auto">
+    <form method="post" class="mt-5">
+        {% csrf_token %}
+        <h3 class="fw-bold mb-3">
+            Edit Profile Details
+        </h2>
+
+        <div class="mb-3">
+            <label for="first_name" class="form-label">
+                First Name
+            </label>
+            <input type="text" class="form-control" id="first_name" name="first_name" value="{{user.first_name}}">
+        </div>
+
+        <div class="mb-3">
+            <label for="last_name" class="form-label">
+                Last Name
+            </label>
+            <input type="text" class="form-control" id="last_name" name="last_name" value="{{user.last_name}}">
+        </div>
+
+        <div class="mb-3">
+            <label for="username" class="form-label">
+                Username
+            </label>
+            <input type="text" class="form-control" id="username" name="username" value="{{user.username}}">
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">
+                Email
+            </label>
+            <input type="email" class="form-control" id="email" name="email" value="{{user.email}}">
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">
+                Change Password
+            </label>
+            <input type="password" class="form-control" id="password" name="password">
+        </div>
+
+        <button type="submit" style="width: 100%;" class="btn btn-success">
+            Edit
+        </button>
+    </form>
+</div>
+{% endblock %}
