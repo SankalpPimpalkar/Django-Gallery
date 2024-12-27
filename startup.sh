@@ -7,7 +7,7 @@ echo "Starting deployment process..."
 
 # Apply database migrations
 echo "Running migrations..."
-python manage.py migrate
+python3 manage.py migrate
 if [ $? -ne 0 ]; then
     echo "Error: Migration failed."
     exit 1
@@ -15,7 +15,7 @@ fi
 
 # Collect static files (consider using S3 for production)
 echo "Collecting static files..."
-python manage.py collectstatic --no-input
+python3 manage.py collectstatic --no-input
 if [ $? -ne 0 ]; then
     echo "Error: Collecting static files failed."
     exit 1
