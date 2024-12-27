@@ -3,10 +3,10 @@ runtime: python311
 build:
   commands:
     pre-build:
-      - pip3 install --upgrade pip
+      - pip install --upgrade pip
     build:
-      - pip3 install -r requirements.txt
-      - python3 manage.py migrate
+      - pip install -r requirements.txt
+      - python manage.py migrate
 run:
   runtime-version: 3.11
   command: sh startup.sh
