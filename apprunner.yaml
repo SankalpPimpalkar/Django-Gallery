@@ -9,22 +9,16 @@ run:
   command: sh startup.sh
   network:
     port: 8000
-  
   env:
     - name: DEBUG
     value: 'True'
-
     - name: DB_NAME
     value: 'postgres'
-
     - name: DB_USER
     value: 'postgres.jwycxcpksudefkicpatr'
-
     - name: DB_PASSWORD
     value: '8Qumi92UPZWuE0jg'
-
     - name: DB_HOST
     value: 'aws-0-ap-south-1.pooler.supabase.com'
-
     - name: DB_PORT
     value: '6543'
