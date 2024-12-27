@@ -11,34 +11,37 @@
             Create Post
         </a>
     {% endif %}
-    
-    <form class="d-flex ms-auto" style="width: 40%;" method="post">
-        {% csrf_token %}
-        <input class="form-control me-2" type="search" placeholder="Search Posts" aria-label="Search" name="search_post">
-        <button class="btn btn-outline-success" type="submit">
-            Search
-        </button>
-    </form>
 </div>
 
+<!-- Search Form -->
+<form class="d-flex ms-auto" style="width: 100%; max-width: 30rem;" method="post">
+    {% csrf_token %}
+    <input class="form-control me-2" type="search" placeholder="Search Posts" aria-label="Search" name="search_post">
+    <button class="btn btn-outline-success" type="submit">
+        Search
+    </button>
+</form>
 
-    <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: start;" class="container-fluid text-center mt-5 px-0">
+<!-- Post Cards -->
+<div class="container-fluid mt-5 px-0">
+    <div class="row justify-content-start g-4">
         {% for post in posts %}
-            <div class="card shadow-sm" style="width: 18rem; border-radius: 8px; overflow: hidden;">
-                <div style="height: 200px; overflow: hidden;">
-                    <img src="{{ post.image.url }}" 
-                        class="card-img-top" 
-                        alt="{{ post.title }}" 
-                        style="object-fit: cover; width: 100%; height: 100%;">
-                </div>
-
-                <div class="card-body" style="text-align: left;">
-                    <h5 class="card-title" style="font-size: 1.25rem; font-weight: bold; margin-bottom: 0.5rem;">
-                        {{ post.title }}
-                    </h5>
-                    <p class="card-text" style="font-size: 0.9rem; color: #555;">
-                        {{ post.description|truncatewords:20 }}
-                    </p>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card shadow-sm" style="border-radius: 8px; overflow: hidden;">
+                    <div style="height: 200px; overflow: hidden;">
+                        <img src="{{ post.image.url }}" 
+                            class="card-img-top" 
+                            alt="{{ post.title }}" 
+                            style="object-fit: cover; width: 100%; height: 100%;">
+                    </div>
+                    <div class="card-body" style="text-align: left;">
+                        <h5 class="card-title" style="font-size: 1.25rem; font-weight: bold; margin-bottom: 0.5rem;">
+                            {{ post.title }}
+                        </h5>
+                        <p class="card-text" style="font-size: 0.9rem; color: #555;">
+                            {{ post.description|truncatewords:20 }}
+                        </p>
+                    </div>
                 </div>
             </div>
         {% empty %}
@@ -55,4 +58,5 @@
         </div>
         {% endfor %}
     </div>
+</div>
 {% endblock %}
